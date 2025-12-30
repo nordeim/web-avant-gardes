@@ -3,157 +3,246 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1"> 
-  <title>Vela — Unforgettable Mockup (Static)</title>
-  <meta name="description" content="A static demo showcasing a distinctive editorial-meets-brutalist interface, focus on hierarchy, motion, and accessibility." />
+  <title>Lumen — Light-Forward Motion Demo</title>
+  <meta name="description" content="A lighter, responsive demo with layered gradients, fluid animations, and polished micro-interactions." />
 
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#061026; --panel:#0b1220; --muted:#98a0ab; --text:#f6fbff; --accent:#06b6d4; --accent-2:#7c3aed;
-      --gap:18px; --radius:12px; --mono: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      --bg: #f7fbff; /* very light */
+      --card: #ffffff;
+      --muted: #6b7280;
+      --text: #0f172a;
+      --accent-a: #6ee7b7; /* mint */
+      --accent-b: #60a5fa; /* sky */
+      --accent-c: #fda4af; /* coral */
+      --glass: rgba(255,255,255,0.6);
+      --radius: 18px;
+      --gap: 20px;
+      --shadow-1: 0 6px 18px rgba(16,24,40,0.06);
+      --shadow-2: 0 18px 40px rgba(16,24,40,0.08);
+      --mono: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto;
+      --display: 'Playfair Display', serif;
     }
+
+    /* Reset */
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;background:linear-gradient(180deg,#041025 0%, #061026 100%);font-family:var(--mono);color:var(--text);-webkit-font-smoothing:antialiased}
+    body{margin:0;background:linear-gradient(180deg,#f7fbff 0%, #eef6ff 100%);color:var(--text);font-family:var(--mono);-webkit-font-smoothing:antialiased}
 
-    .wrap{max-width:1200px;margin:40px auto;padding:32px;display:flex;flex-direction:column;gap:32px}
+    /* Layout container */
+    .wrap{max-width:1200px;margin:36px auto;padding:28px;display:flex;flex-direction:column;gap:28px}
+
     header{display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:#071022;font-weight:800}
-    .title{font-family:'Playfair Display', serif;font-size:18px;letter-spacing:0.08em}
-    .sub{color:var(--muted);font-size:13px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent-a),var(--accent-b));display:grid;place-items:center;font-weight:800;color:#04263b}
+    .site-title{font-family:var(--display);font-size:18px}
+    .site-sub{color:var(--muted);font-size:13px}
 
     /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start}
-    h1{font-family:'Playfair Display',serif;font-size:clamp(40px,7vw,72px);line-height:0.92;margin:0}
-    p.lead{color:var(--muted);max-width:64ch;margin:14px 0 0}
-    .meta{border-left:1px solid rgba(255,255,255,0.04);padding-left:20px;display:flex;flex-direction:column;gap:10px}
-    .stat{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
-    .stat strong{color:var(--accent);display:block;font-weight:700;font-size:18px}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start}
+    h1{font-family:var(--display);font-size:clamp(36px,6.8vw,64px);line-height:0.92;margin:0}
+    p.lead{margin-top:12px;color:var(--muted);max-width:58ch}
 
-    /* Stage */
+    /* Right column with animated gradient panel */
+    .panel{background:linear-gradient(135deg, rgba(96,165,250,0.08), rgba(110,231,183,0.06));border-radius:16px;padding:18px;border:1px solid rgba(16,24,40,0.03);box-shadow:var(--shadow-1);position:relative;overflow:hidden}
+
+    /* Decorative gradient blobs (CSS only) */
+    .blob{position:absolute;border-radius:999px;filter:blur(40px);opacity:0.85;transform-origin:center}
+    .blob.a{width:260px;height:260px;right:-20px;top:-40px;background:radial-gradient(circle at 30% 30%, var(--accent-a), transparent 40%)}
+    .blob.b{width:200px;height:200px;left:-40px;bottom:-40px;background:radial-gradient(circle at 70% 70%, var(--accent-b), transparent 35%)}
+    .blob.c{width:160px;height:160px;right:20px;bottom:-20px;background:radial-gradient(circle at 20% 20%, var(--accent-c), transparent 30%);opacity:0.7}
+
+    .panel h3{margin:0;font-size:18px}
+    .panel p{color:var(--muted);margin-top:8px}
+
+    /* Showcase / Stage */
     .stage{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start}
-    .viewport{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:18px;padding:36px;border:1px solid rgba(255,255,255,0.04);min-height:540px;position:relative;overflow:hidden}
-    .bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px, transparent 1px);background-size:56px 56px;opacity:0.35}
+    .viewport{background:linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.6));border-radius:18px;padding:28px;border:1px solid rgba(16,24,40,0.04);min-height:460px;position:relative;overflow:hidden;box-shadow:var(--shadow-2)}
 
-    .motif{width:420px;height:420px;display:grid;place-items:center;position:relative;transform:rotate(-6deg) translateY(-12px)}
-    .ring{position:absolute;border-radius:999px;will-change:transform,opacity}
-    .ring.outer{width:420px;height:420px;border:3px dashed rgba(255,255,255,0.04)}
-    .ring.mid{width:260px;height:260px;border:3px solid rgba(255,255,255,0.06);mask-image:linear-gradient(90deg,#000 62%, rgba(0,0,0,0.12))}
-    .ring.inner{width:150px;height:150px;border:4px solid var(--accent);box-shadow:0 0 40px rgba(6,182,212,0.12);background:rgba(6,182,212,0.03)}
-    .core{width:52px;height:52px;border-radius:999px;background:var(--accent);box-shadow:0 0 36px rgba(6,182,212,0.18);z-index:10}
+    /* flexible grid of cards inside viewport */
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:var(--card);border-radius:14px;padding:16px;box-shadow:var(--shadow-1);transition:transform .35s cubic-bezier(.2,.9,.3,1), box-shadow .35s;cursor:pointer}
+    .card:hover{transform:translateY(-8px);box-shadow:0 28px 60px rgba(16,24,40,0.12)}
+    .card h4{margin:0;font-size:15px}
+    .card p{color:var(--muted);margin-top:8px;font-size:13px}
 
-    .controls{border-left:1px solid rgba(255,255,255,0.04);padding-left:20px;display:flex;flex-direction:column;gap:18px}
-    .btn{padding:12px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);font-weight:700;cursor:pointer}
-    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#071022;border-color:transparent}
-    input[type=range]{width:100%;height:6px;background:transparent;-webkit-appearance:none}
-    input[type=range]::-webkit-slider-runnable-track{height:6px;background:linear-gradient(90deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));border-radius:6px}
-    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:999px;background:var(--accent);transform:translateY(-5px);box-shadow:0 0 8px rgba(6,182,212,0.12)}
+    /* Animated gradient border accent */
+    .card--accent{position:relative;overflow:hidden}
+    .card--accent::before{content:'';position:absolute;inset:-2px;background:linear-gradient(90deg,var(--accent-a),var(--accent-b),var(--accent-c));z-index:-1;filter:blur(22px);opacity:0.45}
 
-    .docs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .card{padding:14px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.03)}
+    /* Floating header micro-animation */
+    .floaty{animation:floatY 6s ease-in-out infinite}
+    @keyframes floatY{0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)}}
 
-    footer{display:flex;justify-content:space-between;color:var(--muted)}
+    /* Controls column */
+    .controls{display:flex;flex-direction:column;gap:14px}
+    .btn{padding:10px 14px;border-radius:12px;border:none;font-weight:700;background:linear-gradient(90deg,var(--accent-a),var(--accent-b));color:#04263b;cursor:pointer;box-shadow:var(--shadow-1)}
+    .ghost{background:transparent;border:1px solid rgba(16,24,40,0.06);color:var(--text);}
 
-    @media (max-width:1024px){.hero,.stage{grid-template-columns:1fr}.motif{transform:none;margin:0}}
-    @media (max-width:640px){.wrap{padding:18px}.viewport{min-height:320px}}
+    /* Footer notes */
+    .notes{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+
+    /* Responsive behavior */
+    @media (max-width:1100px){ .hero{grid-template-columns:1fr 360px} .stage{grid-template-columns:1fr} .viewport{min-height:380px} }
+    @media (max-width:800px){ .hero{grid-template-columns:1fr} .panel{order:2} .viewport{min-height:320px} .cards{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:480px){ .wrap{padding:18px} .cards{grid-template-columns:1fr} h1{font-size:28px} }
 
     /* reduced motion */
-    @media (prefers-reduced-motion: reduce){.ring,.core{animation:none;transition:none}}
+    @media (prefers-reduced-motion: reduce){ .floaty{animation:none} .card{transition:none} }
 
-    /* focus */
-    .btn:focus{outline:3px solid rgba(6,182,212,0.08);outline-offset:3px}
-
+    /* accessibility focus */
+    .card:focus{outline:3px solid rgba(96,165,250,0.12);outline-offset:4px}
+    .btn:focus{outline:3px solid rgba(110,231,183,0.12);outline-offset:3px}
   </style>
 </head>
 <body>
-  <div class="wrap" role="main" aria-label="Vela demo">
+  <div class="wrap" role="main" aria-label="Lumen motion demo">
+
     <header>
       <div class="brand">
-        <div class="logo" aria-hidden>V</div>
+        <div class="logo" aria-hidden>Lu</div>
         <div>
-          <div class="title">Vela<span style="opacity:0.85"> — Unforgettable</span></div>
-          <div class="sub">Editorial minimalism • Motion-led identity</div>
+          <div class="site-title">Lumen <span style="opacity:0.85">— Light Motion</span></div>
+          <div class="site-sub">A lighter tone demo with layered gradients & fluid interaction</div>
         </div>
       </div>
-      <div class="sub">Static demo • No frameworks</div>
+      <div class="site-sub">Prototype • Responsive • Accessible</div>
     </header>
 
     <section class="hero" aria-labelledby="hero-title">
       <div>
-        <h1 id="hero-title">Design that arrests attention — and keeps it.</h1>
-        <p class="lead">A studio-grade landing demo that uses negative space, editorial type contrast, and a singular visual motif to create an unforgettable impression within the first viewport.</p>
+        <h1 id="hero-title">Lightweight motion. Warm gradients. Delightful rhythm.</h1>
+        <p class="lead">A playful, responsive landing demo that combines soft gradients, elegant typography, and layered motion to create a modern, inviting experience.</p>
       </div>
 
-      <aside class="meta" aria-hidden="false">
-        <div class="stat">Reveal <strong>Limited</strong></div>
-        <div class="stat">Tone <strong>Editorial</strong></div>
-        <div class="stat">Accessibility <strong>AA+</strong></div>
-      </aside>
-    </section>
+      <aside class="panel" aria-hidden="false">
+        <div class="blob a floaty" aria-hidden></div>
+        <div class="blob b floaty" aria-hidden style="animation-delay: .4s"></div>
+        <div class="blob c floaty" aria-hidden style="animation-delay: .9s"></div>
 
-    <section class="stage" aria-label="Showcase stage">
-      <div class="viewport" role="region" aria-label="Design stage">
-        <div class="bg-grid" aria-hidden="true"></div>
-        <div class="motif" aria-hidden="true">
-          <div class="ring outer"></div>
-          <div class="ring mid"></div>
-          <div class="ring inner"></div>
-          <div class="core"></div>
-        </div>
-      </div>
-
-      <aside class="controls" aria-label="Actions">
+        <h3>Showcase</h3>
+        <p>Interactive cards, animated blobs, and responsive composition — designed for pleasant discoverability.</p>
+        <div style="height:18px"></div>
         <div style="display:flex;gap:12px">
-          <button class="btn primary" id="cta-demo">See Demo</button>
-          <button class="btn">Docs</button>
-        </div>
-        <div>
-          <div style="color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:0.08em">Perspective</div>
-          <p style="color:var(--muted);margin:8px 0 0">Asymmetric composition, editorial type, and motion-first micro-interactions.</p>
-        </div>
-        <div style="margin-top:auto">
-          <div style="color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:0.08em">Status</div>
-          <div style="margin-top:8px;color:var(--accent);font-weight:700">READY</div>
+          <button class="btn">Explore</button>
+          <button class="btn ghost">Documentation</button>
         </div>
       </aside>
     </section>
 
-    <section class="docs" aria-label="Design notes">
-      <div class="card"><strong>Clarity</strong><p style="color:var(--muted);margin-top:8px">Editorial hierarchy ensures the headline dominates but the CTA remains unmistakable.</p></div>
-      <div class="card"><strong>Surprise</strong><p style="color:var(--muted);margin-top:8px">Skewed motif and asymmetric rhythm create a lasting visual memory.</p></div>
-      <div class="card"><strong>Craft</strong><p style="color:var(--muted);margin-top:8px">Deliberate spacing, accessible focus, and motion that rewards exploration.</p></div>
-      <div class="card"><strong>Performance</strong><p style="color:var(--muted);margin-top:8px">No large images, minimal shadows, prefers composited properties for smooth rendering.</p></div>
+    <section class="stage" aria-label="Interactive stage">
+      <div class="viewport" role="region" aria-label="Design viewport">
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+          <div>
+            <div style="color:var(--muted);text-transform:uppercase;font-size:12px;letter-spacing:0.08em">Interactive cards</div>
+            <div style="font-weight:700;margin-top:8px">Micro-interactions that feel handcrafted</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn ghost" aria-label="view grid">Grid</button>
+            <button class="btn ghost" aria-label="view list">List</button>
+          </div>
+        </div>
+
+        <div class="cards" id="cards" role="list">
+          <div class="card card--accent" role="listitem" tabindex="0">
+            <h4>Motion System</h4>
+            <p>Independent easing, composited transforms and subtle delays for a natural result.</p>
+          </div>
+          <div class="card" role="listitem" tabindex="0">
+            <h4>Gradient Language</h4>
+            <p>Layered radial/linear blends tuned for warmth and depth on light backgrounds.</p>
+          </div>
+          <div class="card" role="listitem" tabindex="0">
+            <h4>Performance</h4>
+            <p>Prefer transforms & opacity. Small DOM. Reduced layout cost for high frame rates.</p>
+          </div>
+          <div class="card" role="listitem" tabindex="0">
+            <h4>Accessibility</h4>
+            <p>Keyboard focus, visible outlines, reduced-motion respect, semantic markup.</p>
+          </div>
+          <div class="card" role="listitem" tabindex="0">
+            <h4>Responsive</h4>
+            <p>Adaptive grid, accessible controls, and preserved motif at all sizes.</p>
+          </div>
+          <div class="card" role="listitem" tabindex="0">
+            <h4>Microcopy</h4>
+            <p>Clear verbs and outcomes make CTAs faster to understand and act on.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="controls" aria-label="stage controls">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <button class="btn primary" id="demo-cta">Try Motion</button>
+          <button class="btn ghost" id="demo-reset">Reset</button>
+        </div>
+
+        <div style="margin-top:auto;color:var(--muted);font-size:13px">
+          <div style="margin-bottom:8px">Status</div>
+          <div style="color:var(--accent-b);font-weight:700" id="status">Idle</div>
+        </div>
+      </aside>
     </section>
 
-    <footer>
-      <div>Vela • Crafted Demo</div>
-      <div style="color:var(--muted)">© 2025</div>
+    <section class="notes">
+      <div>Design: Lumen system — editorial warmth, light gradients.</div>
+      <div style="color:var(--muted)">Animations: CSS-first, WAAPI for complex sequences if needed.</div>
+    </section>
+
+    <footer style="margin-top:8px;display:flex;justify-content:space-between;color:var(--muted)">
+      <div>© Lumen • Prototype</div>
+      <div>Built for demo — responsive & accessible</div>
     </footer>
   </div>
 
   <script>
-    // Minimal micro-interaction for subtle delight
+    // Gentle, accessible interactions using requestAnimationFrame for smoothness
     (function(){
-      const motif = document.querySelector('.motif');
-      const core = document.querySelector('.core');
-      const btn = document.getElementById('cta-demo');
+      const cards = document.getElementById('cards');
+      const status = document.getElementById('status');
+      const demo = document.getElementById('demo-cta');
+      const reset = document.getElementById('demo-reset');
 
-      // gentle hover float
-      let anim;
-      function hoverOn(){
-        anim = core.animate([{transform:'scale(1)'},{transform:'scale(1.12)'}],{duration:600,fill:'forwards',easing:'ease-out'});
+      // subtle staggered entrance
+      function reveal(){
+        const items = Array.from(cards.children);
+        items.forEach((el,i)=>{
+          el.style.opacity = 0; el.style.transform = 'translateY(10px)';
+          requestAnimationFrame(()=>{
+            setTimeout(()=>{ el.style.transition = 'transform .6s cubic-bezier(.2,.9,.25,1), opacity .6s'; el.style.opacity=1; el.style.transform='translateY(0)'; }, i*90);
+          });
+        });
       }
-      function hoverOff(){ if(anim) anim.reverse(); }
+      reveal();
 
-      motif.addEventListener('mouseenter', hoverOn);
-      motif.addEventListener('mouseleave', hoverOff);
+      // demo action: pulse cards briefly
+      demo.addEventListener('click', ()=>{
+        status.textContent = 'Animating';
+        const items = Array.from(cards.children);
+        items.forEach((el,i)=>{
+          setTimeout(()=>{
+            el.animate([{transform:'translateY(0)'},{transform:'translateY(-10px)'},{transform:'translateY(0)'}],{duration:420, easing:'ease-out'});
+          }, i*80);
+        });
+        setTimeout(()=>{ status.textContent='Idle'; }, 1200);
+      });
 
-      // CTA pulse
-      btn.addEventListener('mouseover', ()=> btn.animate([{transform:'translateY(0)'},{transform:'translateY(-4px)'}], {duration:220, fill:'forwards', easing:'ease-out'}));
+      // reset
+      reset.addEventListener('click', ()=>{ reveal(); status.textContent='Reset'; setTimeout(()=>{ status.textContent='Idle' }, 600); });
+
+      // keyboard affordances
+      cards.addEventListener('keydown', e=>{
+        if(e.key==='Enter' || e.key===' '){ e.preventDefault(); e.target.click(); }
+      });
+
+      // respect reduced motion
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ Array.from(cards.children).forEach(el=>{ el.style.transition='none'; }); }
     })();
   </script>
 </body>
